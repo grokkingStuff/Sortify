@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Scan"/>
+        <item
+            android:id="@+id/nav_event_map"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Event Map"/>
+        <item
+            android:id="@+id/nav_showcaser_list"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Showcaser List"/>
+        <item
+            android:id="@+id/nav_queues"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Queues"/>
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Profile"/>
+            <item
+                android:id="@+id/nav_resume"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Resume"/>
+        </menu>
+    </item>
+
+</menu>
