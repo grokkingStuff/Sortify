@@ -1,0 +1,97 @@
+
+
+
+
+
+* Object Detection
+
+
+
+
+
+
+** Microsoft API
+*** Voice API to autopopulate fields
+
+* TODO Barcode Detection
+#+BEGIN_SRC python
+#!/usr/bin/python
+from sys import argv
+import zbar
+
+# create a Processor
+proc = zbar.Processor()
+
+# configure the Processor
+proc.parse_config('enable')
+
+# initialize the Processor
+device = '/dev/video0'
+if len(argv) > 1:
+    device = argv[1]
+proc.init(device)
+
+# setup a callback
+def my_handler(proc, image, closure):
+    # extract results
+    for symbol in image.symbols:
+        # do something useful with results
+        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+
+proc.set_data_handler(my_handler)
+
+# enable the preview window
+proc.visible = True
+
+# initiate scanning
+proc.active = True
+try:
+    # keep scanning until user provides key/mouse input
+    proc.user_wait()
+except zbar.WindowClosed, e:
+    pass
+
+
+#+END_Src
+
+** NCR API 
+
+#+BEGIN_SRC python :tangle endpointDefinition.py
+import http.client
+
+conn = http.client.HTTPSConnection("hackgt-api.ncrcloud.com")
+
+headers = {
+'accept': "application/json",
+'content-type': "application/json",
+'nep-correlation-id': "SOME_STRING_VALUE",
+'nep-organization': "SOME_STRING_VALUE",
+'nep-application-key': "19c7b50447ef0a4e0147ef8067900000",
+'nep-service-version': "3.0.0-GA:1.0",
+'nep-enterprise-unit': "102c19bde15c4533a67f9191f0135197"
+}
+
+conn.request("GET", "/catalog/category-nodes?pageNumber=0&pageSize=200&parentId=SOME_STRING_VALUE", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+
+
+#+END_SRC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
