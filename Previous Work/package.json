@@ -1,0 +1,32 @@
+{
+  "name": "hackgt4",
+  "version": "1.0.0",
+  "description": "mad hacks",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R-Varun/hackgt4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/R-Varun/hackgt4/issues"
+  },
+  "homepage": "https://github.com/R-Varun/hackgt4#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express-session": "^1.15.6",
+    "needle": "^2.0.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "qrcode": "^0.9.0",
+    "redis": "^2.8.0",
+    "uniqid": "^4.1.1",
+    "uniqueid": "^1.0.0"
+  }
+}

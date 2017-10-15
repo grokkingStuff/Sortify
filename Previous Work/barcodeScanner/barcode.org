@@ -1,0 +1,118 @@
+
+
+
+
+
+
+
+* Dependencies
+
+Add this package to the src file.
+
+
+#+BEGIN_SRC js
+com.google.zxing.integration.android
+#+END_SRC
+
+* Layout File
+Replace the textView default bullshit with this
+
+#+BEGIN_SRC xml
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <Button android:id="@+id/scan_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/scan" />
+</RelativeLayout>
+
+
+<!-- Text information containing barcode type-->
+<TextView
+    android:id="@+id/scan_format"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textIsSelectable="true"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/scan_button" />
+
+<!-- Text information containing barcode content. -->
+<TextView
+    android:id="@+id/scan_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textIsSelectable="true"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/scan_format" />
+
+<string name="scan">Scan</string>
+
+
+#+END_SRC
+
+
+
+
+* Random Shit
+#+BEGIN_SRC python
+#!/usr/bin/python
+from sys import argv
+import zbar
+
+# create a Processor
+proc = zbar.Processor()
+
+# configure the Processor
+proc.parse_config('enable')
+
+# initialize the Processor
+device = '/dev/video0'
+if len(argv) > 1:
+    device = argv[1]
+proc.init(device)
+
+# setup a callback
+def my_handler(proc, image, closure):
+    # extract results
+    for symbol in image.symbols:
+        # do something useful with results
+        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+
+proc.set_data_handler(my_handler)
+
+# enable the preview window
+proc.visible = True
+
+# initiate scanning
+proc.active = True
+try:
+    # keep scanning until user provides key/mouse input
+    proc.user_wait()
+except zbar.WindowClosed, e:
+    pass
+
+#+END_SRC
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Place for developer to place sorrow and generally bitch about life
+
+
+
+
+
+
+
